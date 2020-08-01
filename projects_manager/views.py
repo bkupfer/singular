@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from .models import Project
+from .models import Project, Customer
 
 
 def index(request):
-    all_projects = Project.objects.all()
-    return render(request, "index.html", {"projects": all_projects})
+    customers = Customer.objects.all()
+    return render(request, "index.html", {"customers": customers})
