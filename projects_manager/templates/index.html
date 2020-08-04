@@ -15,15 +15,8 @@
     <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-<!--    &lt;!&ndash; Vue.js development version, includes helpful console warnings &ndash;&gt;-->
-<!--    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
 
     <link rel="shortcut icon" type="image/png" href="static/favicon.ico">
 
@@ -39,55 +32,164 @@
 </head>
 
 <body>
-    <div id="app">
-        <v-app>
-            <v-navigation-drawer app>
+<div id="app">
+    <v-app>
 
-            </v-navigation-drawer>
+        <div>
+            <v-app-bar
+                    :color="color"
+                    dense
+                    dark
+            >
+                <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
-            <v-app-bar app color="deep-purple accent-3" dense dark>
+                <v-toolbar-title>Projects</v-toolbar-title>
 
+                <v-spacer></v-spacer>
+
+                <v-btn icon>
+                    <v-icon>mdi-heart</v-icon>
+                </v-btn>
+
+                <v-btn icon>
+                    <v-icon>mdi-magnify</v-icon>
+                </v-btn>
+
+                <v-menu
+                        left
+                        bottom
+                >
+                    <template v-slot:activator="{ on, attrs }">
+                        <v-btn
+                                icon
+                                v-bind="attrs"
+                                v-on="on"
+                        >
+                            <v-icon>mdi-dots-vertical</v-icon>
+                        </v-btn>
+                    </template>
+
+                    <v-list>
+                        <v-list-item
+                                v-for="n in 4"
+                                :key="n"
+                                @click="() => {}"
+                        >
+                            <v-list-item-title>Option [[ n ]]</v-list-item-title>
+                        </v-list-item>
+                    </v-list>
+                </v-menu>
             </v-app-bar>
+        </div>
 
-            <!-- Sizes your content based upon application components -->
-            <v-main>
-                <!-- Provides the application the proper gutter -->
-                <v-container fluid>
-                    [[ message ]]
-                    <!-- If using vue-router -->
-                    <router-view></router-view>
-                </v-container>
-            </v-main>
+        <v-navigation-drawer
+                app
+                v-model="drawer"
+                :color="color"
+                :expand-on-hover="expandOnHover"
+                :mini-variant="miniVariant"
+                :right="right"
+                :permanent="permanent"
+                :src="bg"
+                absolute
+                dark
+        >
+            <v-list
+                    dense
+                    nav
+                    class="py-0"
+            >
+                <v-list-item two-line :class="miniVariant && 'px-0'">
+                    <v-list-item-avatar>
+                        <img src="https://randomuser.me/api/portraits/men/81.jpg">
+                    </v-list-item-avatar>
 
-            <v-footer app>
-                <!-- -->
-            </v-footer>
-        </v-app>
-    </div>
+                    <v-list-item-content>
+                        <v-list-item-title>Bernardo Küpfer</v-list-item-title>
+                        <v-list-item-subtitle>Wizard</v-list-item-subtitle>
+                    </v-list-item-content>
+                </v-list-item>
 
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+                <v-divider></v-divider>
 
-    <script>
-        const customers = {{ data|safe }};
-    </script>
+                <v-list-item
+                        v-for="item in items"
+                        :key="item.title"
+                        link
+                >
+                    <v-list-item-icon>
+                        <v-icon>[[ item.icon ]]</v-icon>
+                    </v-list-item-icon>
 
-    <script>
-        const app = new Vue({
-            el: '#app',
-            vuetify: new Vuetify(),
-            delimiters: ['[[', ']]'],
-            data: {
-                message: customers,
-            },
-            methods: {
-                greet: function(name) {
-                    console.log('Hello from ' + name + '!')
-                }
+                    <v-list-item-content>
+                        <v-list-item-title>[[ item.title ]]</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+            </v-list>
+        </v-navigation-drawer>
+
+
+
+
+        <!-- Sizes your content based upon application components -->
+        <v-main>
+            <!-- Provides the application the proper gutter -->
+            <v-container fluid>
+                [[ message ]]
+                <!-- If using vue-router -->
+                <router-view></router-view>
+            </v-container>
+        </v-main>
+
+        <v-footer app>
+            <!-- -->
+        </v-footer>
+    </v-app>
+</div>
+
+<script>
+    const customers = {{ data|safe }};
+    const app = new Vue({
+        el: '#app',
+        vuetify: new Vuetify(),
+        delimiters: ['[[', ']]'],
+        data: {
+            message: customers,
+            drawer: true,
+            items: [
+                { title: 'Dashboard', icon: 'mdi-view-dashboard' },
+                { title: 'Projects', icon: 'mdi-home' },
+                { title: 'Models', icon: 'mdi-help-box' },
+                { title: 'Photos', icon: 'mdi-image' },
+                { title: 'Map', icon: 'mdi-map' },
+                { title: 'About', icon: 'mdi-help-box' },
+            ],
+            color: 'primary',
+            colors: [
+                'primary',
+                'blue',
+                'success',
+                'red',
+                'teal',
+            ],
+            right: false,
+            permanent: true,
+            miniVariant: true,
+            expandOnHover: true,
+            background: true,
+        },
+        methods: {
+            greet: function(name) {
+                console.log('Hello from ' + name + '!')
             }
-        });
-    </script>
+        },
+        computed: {
+            bg() {
+                return this.background ? 'https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg' : undefined
+            },
+        }
+    });
+</script>
 
 </body>
-
 </html>
