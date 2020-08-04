@@ -1,23 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="bernardo küpfer besa">
-    <meta name="author" content="bkupfer">
+    <meta name="description" content="singular test">
+    <meta name="author" content="bernardo kuepfer">
 
     <title>bküpfer coding test</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="static/css/bootstrap.css" rel="stylesheet">
-    <link href="static/css/clean-blog.css" rel="stylesheet">
-
     <!-- Custom Fonts -->
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -26,24 +22,12 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <!-- Vue.js development version, includes helpful console warnings -->
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<!--    &lt;!&ndash; Vue.js development version, includes helpful console warnings &ndash;&gt;-->
+<!--    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>-->
 
     <link rel="shortcut icon" type="image/png" href="static/favicon.ico">
 
-    <style type="text/css">
-        .monospaced {
-            font-family: monospace
-        }
-        .monoheader {
-            color: #F92371;
-        }
-        .section {
-            color: #4194d8;
-        }
-        .subsection {
-            color: #f0a64d;
-        }
+    <style>
         .site-footer {
             background: #5496ec;
             color: #FFFFFF;
@@ -55,36 +39,43 @@
 </head>
 
 <body>
-    <header class="intro-header">
-        <div class="container">
-            <h2>Singular</h2>
-            <h3>Project manager</h3>
-        </div>
-    </header>
-
     <div id="app">
-        <div class="container">
-            <div class="row">
-                [[ message ]]
-            </div>
-            <button v-on:click="greet(123)">hi</button>
-        </div>
+        <v-app>
+            <v-navigation-drawer app>
+
+            </v-navigation-drawer>
+
+            <v-app-bar app color="deep-purple accent-3" dense dark>
+
+            </v-app-bar>
+
+            <!-- Sizes your content based upon application components -->
+            <v-main>
+                <!-- Provides the application the proper gutter -->
+                <v-container fluid>
+                    [[ message ]]
+                    <!-- If using vue-router -->
+                    <router-view></router-view>
+                </v-container>
+            </v-main>
+
+            <v-footer app>
+                <!-- -->
+            </v-footer>
+        </v-app>
     </div>
 
-    <footer class="site-footer korean-footer">
-        <div id="footer-content">
-            <p>Copyright 2020 @ bküpfer - Powered with Django</p>
-        </div>
-    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
 
     <script>
         const customers = {{ data|safe }};
-        console.log(customers);
     </script>
 
     <script>
         const app = new Vue({
             el: '#app',
+            vuetify: new Vuetify(),
             delimiters: ['[[', ']]'],
             data: {
                 message: customers,
