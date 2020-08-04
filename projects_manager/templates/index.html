@@ -8,7 +8,7 @@
     <meta name="description" content="bernardo küpfer besa">
     <meta name="author" content="bkupfer">
 
-    <title>bküpfer</title>
+    <title>bküpfer coding test</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="static/css/bootstrap.css" rel="stylesheet">
@@ -26,7 +26,7 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <!-- Vue.js -->
+    <!-- Vue.js development version, includes helpful console warnings -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
     <link rel="shortcut icon" type="image/png" href="static/favicon.ico">
@@ -51,22 +51,23 @@
             padding: 2px;
         }
     </style>
+
 </head>
 
 <body>
-    <header class="intro-header" style="background-image: url('static/img/bdo-leonera.jpg')">
+    <header class="intro-header">
         <div class="container">
             <h2>Singular</h2>
             <h3>Project manager</h3>
         </div>
     </header>
 
-    <div class="container">
-        <div class="row">
-            All projects:
-            {% for c in customers %}
-            <p>{{ c }}</p>
-            {% endfor %}
+    <div id="app">
+        <div class="container">
+            <div class="row">
+                [[ message ]]
+            </div>
+            <button v-on:click="greet(123)">hi</button>
         </div>
     </div>
 
@@ -76,9 +77,26 @@
         </div>
     </footer>
 
-    <script src="static/js/jquery.js"></script>
-    <script src="static/js/bootstrap.js"></script>
-    <script src="static/js/clean-blog.js"></script>
+    <script>
+        const customers = {{ data|safe }};
+        console.log(customers);
+    </script>
+
+    <script>
+        const app = new Vue({
+            el: '#app',
+            delimiters: ['[[', ']]'],
+            data: {
+                message: customers,
+            },
+            methods: {
+                greet: function(name) {
+                    console.log('Hello from ' + name + '!')
+                }
+            }
+        });
+    </script>
+
 </body>
 
 </html>

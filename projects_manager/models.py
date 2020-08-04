@@ -21,4 +21,4 @@ class Project(models.Model):
     objects = models.Manager()
 
     def __str__(self):
-        return self.name + ' project - ' + self.customer.name
+        return str(self.name) + ' project - ' + str(self.customer)
