@@ -1,49 +1,32 @@
-# Heroku Django Starter Template
+# Singular's Project manager
 
-An utterly fantastic project starter template for Django 2.0.
+Prototype for Singular`s coding exercise.
+
+Simple SPA that allows the user inspect their clients and their respective projects database in an organized and scalable fashon.
+
+Full original requirements: _./Coding Assignment_D.pdf_. 
 
 ## Features
+- Latest python3 runtime environment.
+- Backend powered with Django 2
+- SQLite3 relational database
+- Frontend powered with Vue.js
+- CI Deployement on Heroku
 
-- Production-ready configuration for Static Files, Database Settings, Gunicorn, etc.
-- Enhancements to Django's static file serving functionality via WhiteNoise.
-- Latest Python 3.6 runtime environment.
 
 ## How to Use
 
 To use this project, follow these steps:
 
-1. Create your working environment.
-2. Install Django (`$ pipenv install django`)
-3. Create a new project using this template
-
-## Creating Your Project
-
-Using this template to create a new Django app is easy::
-
-    $ django-admin.py startproject --template=https://github.com/heroku/heroku-django-template/archive/master.zip --name=Procfile helloworld
-
-(If this doesn't work on windows, replace `django-admin.py` with `django-admin`)
-
-You can replace ``helloworld`` with your desired project name.
-
-## Deployment to Heroku
-
-    $ git init
-    $ git add -A
-    $ git commit -m "Initial commit"
-
-    $ heroku create
-    $ git push heroku master
-
-    $ heroku run python manage.py migrate
-
-See also, a [ready-made application](https://github.com/heroku/python-getting-started), ready to deploy.
+1. Create your Python 3.6 runtime environment.
+2. Install python dependencies: `$ pip install -r requirements.txt` 
+3. Run database migrations: `$ python manage.py migrate`
+4. Run django backend server: `$ python manage.py runserver 8000` 
 
 
-## License: MIT
+## Note
 
-## Further Reading
+For the sake of quicker prototyping, Vue.js has been added through CDN.
 
-- [Gunicorn](https://warehouse.python.org/project/gunicorn/)
-- [WhiteNoise](https://warehouse.python.org/project/whitenoise/)
-- [dj-database-url](https://warehouse.python.org/project/dj-database-url/)
+For further scaling, its advised to completely separate frontend from backend, and to establish communication between
+them through an API. 
