@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        body {
+            background-image: url("{% static 'quas-wex-exort.png' %}");
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            filter: invert(100%);
+        }
+    </style>
+</head>
+<body id="login">
+<div  class="container-fluid">
+    <div class="row" style="padding: 5%">
+        <p>Welcome back,</p>
+        <h2>Login</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
