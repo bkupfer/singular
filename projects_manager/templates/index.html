@@ -19,62 +19,30 @@
     <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
 
     <link rel="shortcut icon" type="image/png" href="static/favicon.ico">
-
-    <style>
-        .site-footer {
-            background: #5496ec;
-            color: #FFFFFF;
-            text-align: center;
-            padding: 2px;
-        }
-    </style>
-
 </head>
 
 <body>
 <div id="app">
     <v-app>
-
         <div>
-            <v-app-bar
-                    :color="color"
-                    dense
-                    dark
-            >
+            <v-app-bar :color="color" dense dark>
                 <v-app-bar-nav-icon></v-app-bar-nav-icon>
-
-                <v-toolbar-title>Projects</v-toolbar-title>
-
+                <v-toolbar-title>Singular manager</v-toolbar-title>
                 <v-spacer></v-spacer>
-
                 <v-btn icon>
                     <v-icon>mdi-heart</v-icon>
                 </v-btn>
-
                 <v-btn icon>
                     <v-icon>mdi-magnify</v-icon>
                 </v-btn>
-
-                <v-menu
-                        left
-                        bottom
-                >
+                <v-menu left bottom>
                     <template v-slot:activator="{ on, attrs }">
-                        <v-btn
-                                icon
-                                v-bind="attrs"
-                                v-on="on"
-                        >
+                        <v-btn icon v-bind="attrs" v-on="on">
                             <v-icon>mdi-dots-vertical</v-icon>
                         </v-btn>
                     </template>
-
                     <v-list>
-                        <v-list-item
-                                v-for="n in 4"
-                                :key="n"
-                                @click="() => {}"
-                        >
+                        <v-list-item v-for="n in 4" :key="n" @click="() => {}">
                             <v-list-item-title>Option [[ n ]]</v-list-item-title>
                         </v-list-item>
                     </v-list>
@@ -94,11 +62,7 @@
                 absolute
                 dark
         >
-            <v-list
-                    dense
-                    nav
-                    class="py-0"
-            >
+            <v-list dense nav class="py-0">
                 <v-list-item two-line :class="miniVariant && 'px-0'">
                     <v-list-item-avatar>
                         <img src="https://randomuser.me/api/portraits/men/81.jpg">
@@ -112,15 +76,10 @@
 
                 <v-divider></v-divider>
 
-                <v-list-item
-                        v-for="item in items"
-                        :key="item.title"
-                        link
-                >
+                <v-list-item v-for="item in items" :key="item.title" link>
                     <v-list-item-icon>
                         <v-icon>[[ item.icon ]]</v-icon>
                     </v-list-item-icon>
-
                     <v-list-item-content>
                         <v-list-item-title>[[ item.title ]]</v-list-item-title>
                     </v-list-item-content>
@@ -128,15 +87,19 @@
             </v-list>
         </v-navigation-drawer>
 
-
-
-
-        <!-- Sizes your content based upon application components -->
         <v-main>
-            <!-- Provides the application the proper gutter -->
             <v-container fluid>
-                [[ message ]]
-                <!-- If using vue-router -->
+               <v-data-table
+                        :headers="headers"
+                        :items="clients"
+                        item-key="name"
+                        sort-by="name"
+                        group-by="Client"
+                        class="elevation-1"
+                        show-group-by>
+               </v-data-table>
+
+                <code v-if="debug">[[ clients ]]</code>
                 <router-view></router-view>
             </v-container>
         </v-main>
@@ -147,14 +110,17 @@
     </v-app>
 </div>
 
-<script>
-    const customers = {{ data|safe }};
+<script lang="ts">
+    const json_data = {{ data|safe }};
     const app = new Vue({
         el: '#app',
         vuetify: new Vuetify(),
         delimiters: ['[[', ']]'],
         data: {
-            message: customers,
+            debug: false,
+            clients: json_data,
+
+            // Nav- bars
             drawer: true,
             items: [
                 { title: 'Dashboard', icon: 'mdi-view-dashboard' },
@@ -177,11 +143,18 @@
             miniVariant: true,
             expandOnHover: true,
             background: true,
-        },
-        methods: {
-            greet: function(name) {
-                console.log('Hello from ' + name + '!')
-            }
+
+            // Items on tables
+            headers: [
+                {
+                    text: 'Clients projects',
+                    align: 'start',
+                    value: 'name',
+                    groupable: false,
+                },
+                { text: 'Client', value: 'Client', align: 'right', groupable: true  },
+                { text: 'Location', value: 'location', align: 'right',groupable: false },
+            ],
         },
         computed: {
             bg() {
