@@ -21,7 +21,9 @@ To use this project, follow these steps:
 1. Create your Python 3.6 runtime environment.
 2. Install python dependencies: `$ pip install -r requirements.txt` 
 3. Run database migrations: `$ python manage.py migrate`
-4. Run django backend server: `$ python manage.py runserver 8000` 
+4. Collect static files: `$ python manage.py collectstatic`
+5. Run tests: `$ python manage.py test`
+6. Run django backend server: `$ python manage.py runserver <port>` 
 
 
 ## Note
