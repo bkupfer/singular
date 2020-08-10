@@ -12,6 +12,7 @@ class Client(models.Model):
 class Location(models.Model):
     lat = models.FloatField()
     lon = models.FloatField()
+    objects = models.Manager()
 
     def __str__(self):
         return '({}, {})'.format(self.lat, self.lon)

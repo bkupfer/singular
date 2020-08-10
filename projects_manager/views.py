@@ -6,6 +6,11 @@ def index(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login')
 
+    json_data = fetch_client_projects()
+    return render(request, "index.html", {"data": json_data})
+
+
+def fetch_client_projects():
     json_data = []
     clients = Client.objects.all().prefetch_related('projects')
     for c in clients:
@@ -15,4 +20,4 @@ def index(request):
                 'Client': c.name,
                 'location': str(p.location),
             })
-    return render(request, "index.html", {"data": json_data})
+    return json_data
